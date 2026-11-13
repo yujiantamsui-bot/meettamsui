@@ -38,7 +38,7 @@ nav a.outline{border:1.5px solid var(--river);color:var(--river);font-weight:500
 .dd-menu a{display:block;white-space:nowrap}
 @keyframes ddin{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
 .dd:hover .dd-menu a,.dd:focus-within .dd-menu a{animation:ddin .4s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*.07s)}
-.dd-menu a:nth-child(1){--i:0}.dd-menu a:nth-child(2){--i:1}.dd-menu a:nth-child(3){--i:2}.dd-menu a:nth-child(4){--i:3}.dd-menu a:nth-child(5){--i:4}.dd-menu a:nth-child(6){--i:5}.dd-menu a:nth-child(7){--i:6}
+.dd-menu a:nth-child(1){--i:0}.dd-menu a:nth-child(2){--i:1}.dd-menu a:nth-child(3){--i:2}.dd-menu a:nth-child(4){--i:3}.dd-menu a:nth-child(5){--i:4}.dd-menu a:nth-child(6){--i:5}.dd-menu a:nth-child(7){--i:6}.dd-menu a:nth-child(8){--i:7}
 .dd-menu a{transition:background .18s ease,color .18s ease}
 .dd-menu a:hover,.dd-menu a:focus-visible{background:var(--river);color:var(--on-river)}
 nav a.solid{background:var(--river);color:var(--on-river);font-weight:700;border:1.5px solid var(--river)}
@@ -49,7 +49,22 @@ nav a.outline:active,nav a.solid:active{transform:translateY(0);box-shadow:none}
 .hero{padding:72px 0 88px;position:relative;overflow:hidden}
 .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
 .hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(38px,6.4vw,68px);line-height:1.25;margin:0 0 24px;letter-spacing:.02em}
-.hero p{color:var(--muted);max-width:30em;margin:0 0 28px}
+.hero p{color:rgba(255,255,255,.92);max-width:30em;margin:0 0 28px}
+.hero{min-height:min(88vh,760px);display:flex;align-items:center;padding:96px 0;color:#fff;background:#212020}
+.hero .wrap{display:block;position:relative;z-index:2;width:100%}
+.hero h1{color:#fff}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(33,32,32,.78),rgba(33,32,32,.25));z-index:1}
+.hero .btn{background:#fff;color:#212020}
+.hero .btn.ghost{background:transparent;color:#fff;border-color:#fff}
+.slides{position:absolute;inset:0;z-index:0}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease;display:flex;align-items:flex-end;justify-content:flex-end;padding:20px 24px;font-size:14px;color:rgba(255,255,255,.7);background-size:cover;background-position:center}
+.slide.on{opacity:1}
+.slide:nth-child(1){background-image:linear-gradient(135deg,#2547A0,#212020)}
+.slide:nth-child(2){background-image:linear-gradient(135deg,#212020,#2547A0)}
+.slide:nth-child(3){background-image:linear-gradient(135deg,#2547A0,#595959)}
+.slide:nth-child(4){background-image:linear-gradient(135deg,#595959,#212020)}
+.slide:nth-child(5){background-image:linear-gradient(45deg,#212020,#2547A0)}
+@media(prefers-reduced-motion:reduce){.slide{transition:none}}
 .meet{position:relative;aspect-ratio:1;max-width:360px;width:100%;justify-self:center}
 .meet i{position:absolute;top:18%;width:62%;aspect-ratio:1;border-radius:50%}
 .meet i:first-child{left:0;background:var(--river);opacity:.9}
@@ -84,6 +99,14 @@ textarea{min-height:100px}
 footer{padding:48px 0;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
 .note{font-size:13px;color:var(--muted);margin-top:12px}
 [hidden]{display:none!important}
+main:not(.only-visit) #visit,main:not(.only-visit) #getthere{display:none}
+main.only-visit>section:not(#visit):not(#getthere){display:none}
+.where{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:32px}
+.where>div{border-top:3px solid var(--river);padding-top:14px}
+.where h3{font-family:var(--serif);font-size:22px;margin:0 0 10px}
+.where p{margin:0 0 8px;color:var(--muted)}
+.where a{color:var(--river);font-weight:500}
+@media(max-width:760px){.where{grid-template-columns:1fr}}
 #privacy .wrap{max-width:760px}
 #privacy h3{font-family:var(--serif);font-size:22px;margin:36px 0 8px}
 #privacy p,#privacy li{color:var(--muted);margin:0 0 10px}
@@ -105,6 +128,7 @@ footer{padding:48px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 .ph-info h4{font-family:var(--serif);font-size:28px;line-height:1.3;margin:0 0 10px}
 .ph-info .gear{font-size:16px;margin-top:10px}
 .gear2{display:block;margin-top:12px;font-size:16px}
+.loc{display:block;margin-top:12px;font-size:15px;font-weight:500;color:var(--river)}
 .ph-in img{width:100%;height:100%;object-fit:cover;display:block}
 .ph-in.enter{animation:photoin .7s cubic-bezier(.2,.7,.2,1) both}
 .svc-list .svc.active{border-left-color:var(--river)}
@@ -164,20 +188,21 @@ footer{padding:48px 0;border-top:1px solid var(--line);color:var(--muted);font-s
         <a href="#s-bnb">民宿</a>
         <a href="#s-manage">包租代管</a>
         <a href="#s-reg">公司登記</a>
+        <a href="#s-furniture">保昱二手家具行</a>
       </div></div>
     <a class="outline" href="#partner">合作夥伴</a>
-    <a class="solid" href="#visit">預約參觀</a>
+    <a class="solid" href="#booking">立即預約</a>
   </nav>
 </div></header>
 
 <main id="top">
-<section class="hero" id="about"><div class="wrap">
+<section class="hero" id="about"><div class="slides" aria-hidden="true"><div class="slide on">照片：舞蹈教室</div><div class="slide">照片：多人會議室</div><div class="slide">照片：商辦空間</div><div class="slide">照片：民宿</div><div class="slide">照片：美業空間</div></div><div class="wrap">
   <div>
     <h1>讓閒置的空間，<br>長出靈魂。</h1>
     <p>我們是位於淡水的空間經營團隊。從美業工作室、舞蹈教室、共享空間，到民宿與公司登記，我們把閒置的角落整理出用途，也陪伴老師與創業者，把想法長成品牌。</p>
-    <a class="btn" href="#visit">預約參觀</a><a class="btn ghost" href="#partner">成為合作夥伴</a>
+    <a class="btn" href="#booking">立即預約</a><a class="btn ghost" href="#partner">成為合作夥伴</a>
   </div>
-  <div class="meet" role="img" aria-label="兩個圓重疊，象徵相遇"><i></i><i></i><b></b></div>
+  
 </div></section>
 
 <section class="alt" id="why"><div class="wrap">
@@ -195,13 +220,14 @@ footer{padding:48px 0;border-top:1px solid var(--line);color:var(--muted);font-s
   <h2>服務項目</h2>
   <p class="lead">短時間使用或長期經營，都能在這裡找到適合的方式。</p>
   <div class="svc-list" style="margin-top:32px">
-    <div class="svc" id="s-beauty"><div class="ph">照片：美業空間</div><div><h3>美業空間</h3><p>為美甲、美髮、美容老師準備的獨立工作空間，拎包就能開始接客。</p></div></div>
-    <div class="svc" id="s-office"><div class="ph">照片：商辦空間</div><div><h3>商辦空間</h3><p><span class="todo">【商辦的說明，例如坪數、設備、適合的團隊規模】</span></p></div></div>
-    <div class="svc" id="s-class"><div class="ph">照片：舞蹈教室</div><div><h3>舞蹈教室</h3><p>為教學與練習規劃的舞蹈空間，適合固定開班、工作坊與課程租借。<span class="gear2">提供設備：網路、冷氣、飲水機、投影機</span><span class="todo">【請補充坪數與特色】</span></p></div></div>
-    <div class="svc" id="s-other"><div class="ph">照片：其他空間</div><div><h3>其他空間</h3><p>短時間使用，按小時計費，需要時預約就能用。</p><ul class="sub"><li><b>多人會議室（8 到 12 人）</b><span>適合討論與開會。</span><span class="price">NT$300／小時，4 小時 NT$1,000</span></li><li><b>綜合活動教室</b><span>適合各種活動使用。</span><span class="gear">投影機、麥克風、白板、Wi-Fi、茶水、冷氣、喇叭、印表機</span><span class="price">NT$600／小時，2 小時 NT$1,000</span></li><li><b>影音室</b><span>單人休息空間，備有電視與遊戲機。</span><span class="price">NT$150／小時</span></li><li><b>個人辦公室</b><span>單人使用的獨立辦公空間。</span><span class="price">NT$150／小時</span></li><li><b>討論室（2 到 4 人）</b><span>適合小組討論，也可以當家教教室使用。</span><span class="price">NT$150／小時</span></li></ul></div></div>
-    <div class="svc" id="s-bnb"><div class="ph">照片：民宿</div><div><h3>民宿</h3><p><span class="todo">【一句話描述民宿特色】</span></p></div></div>
-    <div class="svc" id="s-manage"><div class="ph">照片：包租代管</div><div><h3>包租代管</h3><p>有閒置的房子，不知道怎麼運用？我們協助規劃用途、尋找適合的使用者，並負責日常管理。<span class="todo">【請確認運作模式】</span></p></div></div>
-    <div class="svc" id="s-reg"><div class="ph">照片：公司登記</div><div><h3>公司登記</h3><p>提供借址登記服務，讓新創公司與個人工作室有一個穩定的營業地址。<strong class="pr">首年每月 NT$1,300</strong></p></div></div>
+    <div class="svc" id="s-beauty"><div class="ph">照片：美業空間</div><div><h3>美業空間</h3><p>為美甲、美髮、美容老師準備的獨立工作空間，拎包就能開始接客。我們也提供美甲、美睛、臉部保養與身心療癒等服務，並歡迎美業老師一起合作。<span class="loc">空間位置：遇見美業 <span class="todo">【地址之後補上】</span><br>請先至 MEET遇見共享空間（中山路126號B1）報到</span></p></div></div>
+    <div class="svc" id="s-office"><div class="ph">照片：商辦空間</div><div><h3>商辦空間</h3><p>專業辦公空間，彈性租用、立即進駐。不論是新創團隊、企業分公司或自由工作者，都能找到適合的辦公方案，有獨立辦公室，也有共享辦公空間。<span class="gear2">設備：投影設備、白板、冷氣</span><span class="loc">空間位置：遇見商務中心（學府路30號）<br>請先至 MEET遇見共享空間（中山路126號B1）報到</span></p></div></div>
+    <div class="svc" id="s-class"><div class="ph">照片：舞蹈教室</div><div><h3>舞蹈教室</h3><p>為教學與練習規劃的舞蹈空間，適合固定開班、工作坊與課程租借。<span class="gear2">提供設備：網路、冷氣、飲水機、投影機</span><span class="todo">【請補充坪數與特色】</span><span class="loc">空間位置：電梯大樓 3 樓 <span class="todo">【確切地址之後補上】</span><br>請先至 MEET遇見共享空間（中山路126號B1）報到</span></p></div></div>
+    <div class="svc" id="s-other"><div class="ph">照片：其他空間</div><div><h3>其他空間</h3><p>短時間使用，按小時計費，需要時預約就能用。<span class="loc">據點：MEET遇見共享空間</span></p><ul class="sub"><li><b>多人會議室（8 到 12 人）</b><span>適合會議、團體討論、課程、面試，以及各式工作與創業使用。</span><span class="price">NT$300／小時，4 小時 NT$1,000</span></li><li><b>綜合活動教室</b><span>適合各種活動使用。</span><span class="gear">投影機、麥克風、白板、Wi-Fi、茶水、冷氣、喇叭、印表機</span><span class="price">NT$600／小時，2 小時 NT$1,000</span></li><li><b>影音室</b><span>單人休息空間，備有電視與遊戲機。</span><span class="price">NT$150／小時</span></li><li><b>個人辦公室</b><span>適合個人辦公、創業與臨時工作，安靜舒適、彈性使用。</span><span class="price">NT$150／小時</span></li><li><b>討論室（2 到 4 人）</b><span>適合教學、課程、小型會議、個人進修與團隊討論，也可以當家教教室使用。</span><span class="price">NT$150／小時</span></li></ul></div></div>
+    <div class="svc" id="s-bnb"><div class="ph">照片：民宿</div><div><h3>民宿</h3><p>舒適的住宿空間，自助入住，交通便利，從淡水捷運站步行約 5 到 10 分鐘。入住資訊、房況查詢與優惠消息，都可以透過 LINE 詢問。<span class="loc">據點：MEET遇見共享空間</span></p></div></div>
+    <div class="svc" id="s-manage"><div class="ph">照片：包租代管</div><div><h3>包租代管</h3><p>有閒置的房子，不知道怎麼運用？我們協助規劃用途、尋找適合的使用者，並負責日常管理。<span class="todo">【請確認運作模式】</span><span class="loc">據點：MEET遇見共享空間</span></p></div></div>
+    <div class="svc" id="s-reg"><div class="ph">照片：公司登記</div><div><h3>公司登記</h3><p>提供借址登記與收信服務，讓新創公司與個人工作室有一個穩定的營業地址。<strong class="pr">首年每月 NT$1,300</strong><span class="loc">據點：MEET遇見共享空間</span></p></div></div>
+    <div class="svc" id="s-furniture"><div class="ph">照片：保昱二手家具行</div><div><h3>保昱二手家具行</h3><p>好物再利用，生活更美好。嚴選二手商品，品質安心、價格實惠，有除濕機、電視、床板、床墊等家電與家具。<span class="gear2">營業時間：早上 10:00 至晚上 7:00</span><span class="loc">據點：保昱二手家具行（學府路123號）</span></p></div></div>
   </div>
 </div></section>
 
@@ -227,8 +253,8 @@ footer{padding:48px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 
 <section id="visit"><div class="wrap split">
   <div>
-    <h2>想先來看看空間嗎？</h2>
-    <p class="lead">不論是要租用、居住、登記公司，或想談合作，都歡迎預約參觀。留下聯絡方式，我們會安排時間帶你看看。</p>
+    <h2>立即預約參觀</h2>
+    <p class="lead">所有參觀都從 MEET遇見共享空間（中山路126號B1）開始，預約後請先到這裡報到，我們會帶你前往各個空間。保昱二手家具行在營業時間內可以直接前往。</p>
   </div>
   <div>
     <form id="vform">
@@ -240,13 +266,22 @@ footer{padding:48px 0;border-top:1px solid var(--line);color:var(--muted);font-s
         <select name="s"><option>上午</option><option>下午</option><option>晚上</option></select>
       </label>
       <label>想了解的項目
-        <select name="k" id="vkind"><option>空間借用</option><option>共享空間</option><option>包租代管</option><option>公司登記</option><option>民宿</option><option>想談合作</option><option>其他</option></select>
+        <select name="k" id="vkind"><option>美業空間</option><option>商辦空間</option><option>舞蹈教室</option><option>其他空間（會議室、活動教室等）</option><option>民宿</option><option>包租代管</option><option>公司登記</option><option>想談合作</option><option>其他</option></select>
       </label>
       <label id="vother" hidden>請說明想了解的內容<input type="text" name="o"></label>
       <button class="btn" type="submit">預約參觀</button>
       <p class="note">送出即表示你已閱讀並同意<a href="#privacy">隱私權政策</a>。</p>
     </form>
     <div class="ok" id="vok" role="status">已收到你的預約，我們會盡快與你確認時間。（雛型示範，尚未真正送出）</div>
+  </div>
+</div></section>
+<section class="alt" id="getthere"><div class="wrap">
+  <h2>交通方式與地址</h2>
+  <p class="lead">所有參觀都從 MEET遇見共享空間開始，抵達後我們會帶你前往各個空間。</p>
+  <div class="where">
+    <div><h3>MEET遇見共享空間（接待與報到）</h3><p>251 新北市淡水區中山路126號B1</p><p>捷運步行約 5 分鐘<span class="todo">【請補充捷運站名、公車路線與停車資訊】</span></p><p><a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B7%A1%E6%B0%B4%E5%8D%80%E4%B8%AD%E5%B1%B1%E8%B7%AF126%E8%99%9F" target="_blank" rel="noopener">在 Google 地圖開啟</a></p></div>
+    <div><h3>遇見商務中心</h3><p>251 新北市淡水區鄧公里學府路30號</p><p>請先至 MEET遇見共享空間報到。</p><p><a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B7%A1%E6%B0%B4%E5%8D%80%E5%AD%B8%E5%BA%9C%E8%B7%AF30%E8%99%9F" target="_blank" rel="noopener">在 Google 地圖開啟</a></p></div>
+    <div><h3>保昱二手家具行</h3><p>新北市淡水區學府路123號</p><p>營業時間：早上 10:00 至晚上 7:00，可直接前往。</p><p><a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B7%A1%E6%B0%B4%E5%8D%80%E5%AD%B8%E5%BA%9C%E8%B7%AF123%E8%99%9F" target="_blank" rel="noopener">在 Google 地圖開啟</a></p></div>
   </div>
 </div></section>
 </main>
@@ -283,7 +318,11 @@ footer{padding:48px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 </div></section>
 
 <footer><div class="wrap">
-  <p>meet 遇見共享空間｜251 新北市淡水區中山路126號B1｜<a href="tel:0918333385">0918-333-385</a>｜<a href="mailto:meet1980.homestay@gmail.com">meet1980.homestay@gmail.com</a>｜<a href="https://line.me/R/ti/p/@572fucsb?oat_content=url" target="_blank" rel="noopener">LINE 官方帳號</a></p>
+  <p>MEET遇見共享空間（接待與報到）：251 新北市淡水區中山路126號B1（捷運步行 5 分鐘）｜<a href="tel:0918333385">0918-333-385</a>｜<a href="mailto:meet1980.homestay@gmail.com">meet1980.homestay@gmail.com</a>｜<a href="https://line.me/R/ti/p/@572fucsb?oat_content=url" target="_blank" rel="noopener">LINE：@meet666</a></p>
+  <p>遇見商務中心：251 新北市淡水區鄧公里學府路30號（請先至 MEET遇見共享空間報到）</p>
+  <p>電梯大樓 3 樓（舞蹈教室）：<span class="todo">【確切地址之後補上】</span>（請先至 MEET遇見共享空間報到）</p>
+  <p>保昱二手家具行：新北市淡水區學府路123號</p>
+  <p>遇見美業：<span class="todo">【地址之後補上】</span>（請先至 MEET遇見共享空間報到）</p>
   <p>昱建有限公司　統一編號 93718083　<a href="#privacy">隱私權政策</a></p>
   <p class="note">這是網站雛型，照片與【】標示處待補，表單僅示範畫面，正式表單將在 Squarespace 製作。</p>
 </div></footer>
@@ -316,13 +355,19 @@ vk.addEventListener("change",function(){var on=vk.value==="其他";vo.hidden=!on
   var mainEl=document.querySelector("main"),pv=document.getElementById("privacy");
   function route(){
     var h=location.hash.slice(1);
-    if(h==="privacy"){mainEl.hidden=true;pv.hidden=false;window.scrollTo(0,0);}
+    if(h==="privacy"){mainEl.hidden=true;pv.hidden=false;window.scrollTo(0,0);}else if(h==="booking"){mainEl.hidden=false;pv.hidden=true;mainEl.classList.add("only-visit");window.scrollTo(0,0);}
     else{
-      var was=mainEl.hidden;mainEl.hidden=false;pv.hidden=true;
+      var was=mainEl.hidden||mainEl.classList.contains("only-visit");mainEl.hidden=false;pv.hidden=true;mainEl.classList.remove("only-visit");
       if(was){var t=h&&document.getElementById(h);if(t){t.scrollIntoView();}else{window.scrollTo(0,0);}}
     }
   }
   window.addEventListener("hashchange",route);route();
+})();
+(function(){
+  var ss=document.querySelectorAll(".slide");
+  if(ss.length<2||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  var i=0;
+  setInterval(function(){ss[i].classList.remove("on");i=(i+1)%ss.length;ss[i].classList.add("on");},5000);
 })();
 var tt=document.getElementById("totop");
 window.addEventListener("scroll",function(){tt.classList.toggle("show",window.scrollY>400);},{passive:true});
